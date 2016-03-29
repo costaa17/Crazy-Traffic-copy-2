@@ -22,6 +22,7 @@
 		24AB07BD1CA8DD30005DE330 /* Train.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07BC1CA8DD30005DE330 /* Train.swift */; };
 		24AB07BF1CA8DE62005DE330 /* ContactTypeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */; };
 		24AB07C11CA8E269005DE330 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07C01CA8E269005DE330 /* Level.swift */; };
+		24AB07C31CAA1BFF005DE330 /* MapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07C21CAA1BFF005DE330 /* MapScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		24AB07BC1CA8DD30005DE330 /* Train.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Train.swift; sourceTree = "<group>"; };
 		24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTypeTest.swift; sourceTree = "<group>"; };
 		24AB07C01CA8E269005DE330 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		24AB07C21CAA1BFF005DE330 /* MapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,8 @@
 				24AB07841CA85C9A005DE330 /* GameScene.sks */,
 				24AB07861CA85C9A005DE330 /* GameScene.swift */,
 				24AB07881CA85C9A005DE330 /* GameViewController.swift */,
+				24AB07C01CA8E269005DE330 /* Level.swift */,
+				24AB07BC1CA8DD30005DE330 /* Train.swift */,
 				24AB078A1CA85C9A005DE330 /* Main.storyboard */,
 				24AB078D1CA85C9A005DE330 /* Assets.xcassets */,
 				24AB078F1CA85C9A005DE330 /* LaunchScreen.storyboard */,
@@ -124,9 +128,8 @@
 				24AB07B41CA85F05005DE330 /* DrawNodes.swift */,
 				24AB07B61CA85F16005DE330 /* ReadData.swift */,
 				24AB07B81CA85F28005DE330 /* SlideDirection.swift */,
-				24AB07BC1CA8DD30005DE330 /* Train.swift */,
 				24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */,
-				24AB07C01CA8E269005DE330 /* Level.swift */,
+				24AB07C21CAA1BFF005DE330 /* MapScene.swift */,
 			);
 			path = "Crazy Traffic copy 2";
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				24AB07BD1CA8DD30005DE330 /* Train.swift in Sources */,
 				24AB07C11CA8E269005DE330 /* Level.swift in Sources */,
 				24AB07891CA85C9A005DE330 /* GameViewController.swift in Sources */,
+				24AB07C31CAA1BFF005DE330 /* MapScene.swift in Sources */,
 				24AB07B71CA85F16005DE330 /* ReadData.swift in Sources */,
 				24AB07831CA85C9A005DE330 /* AppDelegate.swift in Sources */,
 				24AB07BF1CA8DE62005DE330 /* ContactTypeTest.swift in Sources */,
