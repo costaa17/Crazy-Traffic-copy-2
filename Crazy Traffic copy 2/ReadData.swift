@@ -15,16 +15,19 @@ enum Type{
     case walk
     case cross
     case crazyPedestrian
+    case garbage
 
 }
 
 class ReadData {
     
-    static var paths = [String: Any]()
+    static var paths = [Dictionary<String, Any>]()
     static var tileWidth: CGFloat?
     static var tileHeight: CGFloat?
     
     static func readData(filePath: String){
+        paths = [Dictionary<String, Any>]()
+        var thisPath = [String: Any]()
         var points: [CGPoint] = []
         var pathArray: [[CGPoint]] = []
         
@@ -36,6 +39,7 @@ class ReadData {
                     let dic = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String: AnyObject]
                     let pathsArray = dic!["paths"]// array of dictionaries
                     for path in pathsArray as! NSArray{
+                        thisPath = [String: Any]()
                         path.valueForKey("points")
                         let pointsArray = path.valueForKey("points") as! NSArray // array of CGPoint arrays
                         for curve in pointsArray{
@@ -45,8 +49,8 @@ class ReadData {
                                 let flx = CGFloat(point[0].floatValue)
                                 let fly = CGFloat(point[1].floatValue)
                                 let screenSize = UIScreen.mainScreen().bounds
-                                tileWidth = screenSize.width/((path.valueForKey("cols") as! CGFloat))
-                                tileHeight = screenSize.height/((path.valueForKey("rows") as! CGFloat))
+                                tileWidth = screenSize.width/((dic!["cols"] as! CGFloat))
+                                tileHeight = screenSize.height/((dic!["rows"] as! CGFloat))
                                 points.append(CGPointMake(flx  * CGFloat(tileWidth!), fly * CGFloat(tileHeight!)))
                                
                                 
@@ -59,24 +63,25 @@ class ReadData {
                         
                         switch typeString as! String{
                         case "road":
-                            paths["type"] = "road"
+                            thisPath["type"] = Type.road
                         case "rail":
-                            paths["type"] = "rail"
+                            thisPath["type"] = Type.rail
                         case "walk":
-                            paths["type"] = "walk"
+                            thisPath["type"] = Type.walk
                         case "cross":
-                            paths["type"] = "cross"
+                            thisPath["type"] = Type.cross
                         case "crazyPedestrian":
-                            paths["type"] = "crazyPedestrian"
+                            thisPath["type"] = Type.crazyPedestrian
                         case "garbage":
-                            paths["type"] = "garbage"
+                            thisPath["type"] = Type.garbage
                         default: break
                             
                         }
                         
-                        paths["points"] = pathArray
+                        thisPath["points"] = pathArray
 
                     }
+                    paths.append(thisPath)
                     
                 }catch{
                     
@@ -86,9 +91,6 @@ class ReadData {
             Swift.print(error)
             
             // contents could not be loaded
-        }
-        
-
-        
+        }  
     }
 }

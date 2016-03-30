@@ -20,7 +20,7 @@ class DrawNodes{
     static let goalLabel = SKLabelNode(fontNamed:"Chalkduster")
     static let specialGoalLabel = SKLabelNode(fontNamed:"Chalkduster")
     static let tutorialShapeN = SKShapeNode()
-
+    
     static func drawPlayButton(scene: SKScene, big: Bool){
         var clippath = CGPathCreateWithRoundedRect (CGRectMake(0,0,175,50), 10.0, 10.0, nil)
         if(big){
@@ -45,7 +45,7 @@ class DrawNodes{
             CGPathAddLineToPoint( play, nil, 0, 35 )
             CGPathAddLineToPoint( play, nil, 25, 17.5 )
             CGPathAddLineToPoint( play, nil, 0, 0 )
-
+            
         }
         playDraw.path = play
         playDraw.strokeColor = UIColor.blackColor()
@@ -82,7 +82,7 @@ class DrawNodes{
         tutorialShapeN.fillColor = UIColor.blackColor()
         tutorialShapeN.strokeColor = UIColor.blackColor()
         scene.addChild(tutorialShapeN)
-
+        
     }
     
     static func drawScoreLabel(scene: SKScene){
@@ -94,20 +94,105 @@ class DrawNodes{
     }
     
     static func drawHighScoreLabel(scene: SKScene){
-    
+        
     }
     
     static func drawGoalLabel(scene: SKScene){
-    
+        
     }
     
     static func drawSpecialGoalLabel(scene: SKScene){
         
     }
     
-    static func drawPaths(pathsArray: [String: AnyObject], scene: SKScene) {
-       
+    static func drawPaths(scene: SKScene) {
+        if let path = NSBundle.mainBundle().pathForResource("test", ofType:"json") {
+            print(":)")
+            ReadData.readData(path)
+        }
+        let p = ReadData.paths
+        for path in ReadData.paths{
+            if path["type"] as! Type != Type.garbage{
+                // build CGPath
+                let curves = path["points"] as! [[CGPoint]]
+                let myPath = CGPathCreateMutable()
+                for curve in curves{
+                    if curve.count == 2 {
+                        // Draw a straight line
+                        //if path[0] == a {
+                        CGPathMoveToPoint ( myPath , nil, (curve[0]).x, (curve[0]).y )
+                        //}
+                        CGPathAddLineToPoint( myPath, nil, (curve[1]).x, (curve[1]).y )
+                        
+                    }else if curve.count == 3 {
+                        // Draw curve with 3 points
+                        //if path[0] == a {
+                        CGPathMoveToPoint( myPath , nil, (curve[0]).x, (curve[0]).y )
+                        //}
+                        CGPathAddCurveToPoint( myPath, nil, (curve[2]).x, (curve[2]).y, (curve[1]).x, (curve[1]).y,(curve[1]).x, (curve[1]).y )
+                        
+                    }else if curve.count == 4 {
+                        // Draw curve with 4 points
+                        //if path[0] == a {
+                        CGPathMoveToPoint( myPath , nil, (curve[0]).x, (curve[0]).y )
+                        //}
+                        CGPathAddCurveToPoint( myPath, nil, (curve[2]).x, (curve[2]).y, (curve[3]).x, (curve[3]).y,(curve[1]).x, (curve[1]).y )
+                    }
+                }
+                // myPath is the CGPath
+                switch path["type"] as! Type{
+                
+                case Type.road:
+                    let myShapeNode = SKShapeNode()
+                    myShapeNode.path = myPath
+                    myShapeNode.lineWidth = 53
+                    myShapeNode.strokeColor = UIColor(red: 96/255.0, green: 96/255.0, blue: 96/255.0, alpha: 1.0)//gray
+                    scene.addChild(myShapeNode)
+                    
+                case Type.rail:
+                    //add wood part
+                    let myShapeNode = SKShapeNode()
+                    myShapeNode.path = myPath
+                    myShapeNode.lineWidth = 20
+                    let myDashedPath = CGPathCreateCopyByDashingPath(myShapeNode.path, nil, 0, [5.0,5.0], 2)
+                    myShapeNode.strokeColor = UIColor(red: 102/255.0, green: 51/255.0, blue: 0.0, alpha: 1.0)//brown
+                    myShapeNode.path = myDashedPath
+                    scene.addChild(myShapeNode)
+                    
+                    //add steel part
+                    let myShapeNode2 = SKShapeNode()
+                    myShapeNode2.path = myPath
+                    let myShapeNodeOutP = SKShapeNode()
+                    myShapeNodeOutP.strokeColor = UIColor(red: 180/255.0, green: 180/255.0, blue: 180/255, alpha: 1.0) // gray
+                    let outPath = CGPathCreateCopyByStrokingPath(myShapeNode2.path, nil, 10, CGLineCap.Round , CGLineJoin.Round, 0)
+                    myShapeNodeOutP.path = outPath
+                    myShapeNodeOutP.lineWidth = 2
+                    scene.addChild(myShapeNodeOutP)
+                    
+                case Type.walk:
+                    let myShapeNode = SKShapeNode()
+                    myShapeNode.path = myPath
+                    myShapeNode.lineWidth = 15
+                    myShapeNode.strokeColor = UIColor(red: 167/255.0, green: 125/255.0, blue: 73/255, alpha: 1.0)//brown
+                    scene.addChild(myShapeNode)
+                    
+                case Type.cross:
+                    let myShapeNode = SKShapeNode()
+                    myShapeNode.path = myPath
+                    myShapeNode.lineWidth = 30
+                    let myDashedPath = CGPathCreateCopyByDashingPath(myShapeNode.path, nil, 0, [7.0,7.0], 2)
+                    myShapeNode.strokeColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1.0)//brown
+                    myShapeNode.path = myDashedPath
+                    scene.addChild(myShapeNode)
+
+                default:
+                    break
+
+                }
+            }
+        }   
     }
+    
     
     static func newCar(scene: SKScene){
         // set up texture, physics, name, speed, type and add to scene
@@ -123,5 +208,12 @@ class DrawNodes{
     
     static func addGarbage(scene: SKScene){
         // random type in random location
+    }
+    static func centerPoint(myPoint: CGPoint) -> CGPoint{
+        let point = pointFromIndex(myPoint)
+        return CGPointMake((floor(point.x / ReadData.tileHeight!) * ReadData.tileWidth!) + ReadData.tileWidth!, (floor(point.y / ReadData.tileHeight!) * ReadData.tileHeight!) + ReadData.tileHeight!)
+    }
+    static func pointFromIndex(point: CGPoint) -> CGPoint{
+        return CGPointMake(point.x * ReadData.tileWidth!, point.y * ReadData.tileHeight!)
     }
 }

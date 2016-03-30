@@ -10,8 +10,9 @@ import SpriteKit
 
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = UIColor.blackColor()
-        DrawNodes.drawPlayButton(self, big: true)
+        self.backgroundColor = UIColor.whiteColor()
+        //DrawNodes.drawPlayButton(self, big: true)
+        DrawNodes.drawPaths(self)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

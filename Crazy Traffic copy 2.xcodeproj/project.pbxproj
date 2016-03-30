@@ -23,6 +23,7 @@
 		24AB07BF1CA8DE62005DE330 /* ContactTypeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */; };
 		24AB07C11CA8E269005DE330 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07C01CA8E269005DE330 /* Level.swift */; };
 		24AB07C31CAA1BFF005DE330 /* MapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07C21CAA1BFF005DE330 /* MapScene.swift */; };
+		24AB07C51CAB6C9A005DE330 /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = 24AB07C41CAB6C9A005DE330 /* test.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTypeTest.swift; sourceTree = "<group>"; };
 		24AB07C01CA8E269005DE330 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		24AB07C21CAA1BFF005DE330 /* MapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapScene.swift; sourceTree = "<group>"; };
+		24AB07C41CAB6C9A005DE330 /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,9 +126,10 @@
 				24AB078A1CA85C9A005DE330 /* Main.storyboard */,
 				24AB078D1CA85C9A005DE330 /* Assets.xcassets */,
 				24AB078F1CA85C9A005DE330 /* LaunchScreen.storyboard */,
+				24AB07C41CAB6C9A005DE330 /* test.json */,
 				24AB07921CA85C9A005DE330 /* Info.plist */,
-				24AB07B41CA85F05005DE330 /* DrawNodes.swift */,
 				24AB07B61CA85F16005DE330 /* ReadData.swift */,
+				24AB07B41CA85F05005DE330 /* DrawNodes.swift */,
 				24AB07B81CA85F28005DE330 /* SlideDirection.swift */,
 				24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */,
 				24AB07C21CAA1BFF005DE330 /* MapScene.swift */,
@@ -258,6 +261,7 @@
 			files = (
 				24AB07851CA85C9A005DE330 /* GameScene.sks in Resources */,
 				24AB07911CA85C9A005DE330 /* LaunchScreen.storyboard in Resources */,
+				24AB07C51CAB6C9A005DE330 /* test.json in Resources */,
 				24AB078E1CA85C9A005DE330 /* Assets.xcassets in Resources */,
 				24AB078C1CA85C9A005DE330 /* Main.storyboard in Resources */,
 			);
