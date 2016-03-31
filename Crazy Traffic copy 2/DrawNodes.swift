@@ -107,10 +107,8 @@ class DrawNodes{
     
     static func drawPaths(scene: SKScene) {
         if let path = NSBundle.mainBundle().pathForResource("test", ofType:"json") {
-            print(":)")
             ReadData.readData(path)
         }
-        let p = ReadData.paths
         for path in ReadData.paths{
             if path["type"] as! Type != Type.garbage{
                 // build CGPath
@@ -120,23 +118,23 @@ class DrawNodes{
                     if curve.count == 2 {
                         // Draw a straight line
                         //if path[0] == a {
-                        CGPathMoveToPoint ( myPath , nil, (curve[0]).x, (curve[0]).y )
+                        CGPathMoveToPoint ( myPath , nil, centerPoint(curve[0]).x, centerPoint(curve[0]).y )
                         //}
-                        CGPathAddLineToPoint( myPath, nil, (curve[1]).x, (curve[1]).y )
+                        CGPathAddLineToPoint( myPath, nil, centerPoint(curve[1]).x, centerPoint(curve[1]).y )
                         
                     }else if curve.count == 3 {
                         // Draw curve with 3 points
                         //if path[0] == a {
-                        CGPathMoveToPoint( myPath , nil, (curve[0]).x, (curve[0]).y )
+                        CGPathMoveToPoint( myPath , nil, centerPoint(curve[0]).x, centerPoint(curve[0]).y )
                         //}
-                        CGPathAddCurveToPoint( myPath, nil, (curve[2]).x, (curve[2]).y, (curve[1]).x, (curve[1]).y,(curve[1]).x, (curve[1]).y )
+                        CGPathAddCurveToPoint( myPath, nil, centerPoint(curve[2]).x, centerPoint(curve[2]).y, centerPoint(curve[1]).x, centerPoint(curve[1]).y,centerPoint(curve[1]).x, centerPoint(curve[1]).y )
                         
                     }else if curve.count == 4 {
                         // Draw curve with 4 points
                         //if path[0] == a {
-                        CGPathMoveToPoint( myPath , nil, (curve[0]).x, (curve[0]).y )
+                        CGPathMoveToPoint( myPath , nil, centerPoint(curve[0]).x, centerPoint(curve[0]).y )
                         //}
-                        CGPathAddCurveToPoint( myPath, nil, (curve[2]).x, (curve[2]).y, (curve[3]).x, (curve[3]).y,(curve[1]).x, (curve[1]).y )
+                        CGPathAddCurveToPoint( myPath, nil, centerPoint(curve[2]).x, centerPoint(curve[2]).y, centerPoint(curve[3]).x, centerPoint(curve[3]).y,centerPoint(curve[1]).x, centerPoint(curve[1]).y )
                     }
                 }
                 // myPath is the CGPath
@@ -211,7 +209,7 @@ class DrawNodes{
     }
     static func centerPoint(myPoint: CGPoint) -> CGPoint{
         let point = pointFromIndex(myPoint)
-        return CGPointMake((floor(point.x / ReadData.tileHeight!) * ReadData.tileWidth!) + ReadData.tileWidth!, (floor(point.y / ReadData.tileHeight!) * ReadData.tileHeight!) + ReadData.tileHeight!)
+        return CGPointMake((floor(point.x / ReadData.tileWidth!) * ReadData.tileWidth!) + ReadData.tileWidth!, (floor(point.y / ReadData.tileHeight!) * ReadData.tileHeight!) + ReadData.tileHeight!)
     }
     static func pointFromIndex(point: CGPoint) -> CGPoint{
         return CGPointMake(point.x * ReadData.tileWidth!, point.y * ReadData.tileHeight!)

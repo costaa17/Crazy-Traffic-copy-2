@@ -27,20 +27,22 @@ class ReadData {
     
     static func readData(filePath: String){
         paths = [Dictionary<String, Any>]()
-        var thisPath = [String: Any]()
+        
         var points: [CGPoint] = []
         var pathArray: [[CGPoint]] = []
+        var thisPath = [String: Any]()
         
         do {
             let contents = try NSString(contentsOfFile: filePath, usedEncoding: nil) as String
             
             if let data = contents.dataUsingEncoding(NSUTF8StringEncoding) {
                 do {
-                    let dic = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String: AnyObject]
+                    let dic = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String:AnyObject]
                     let pathsArray = dic!["paths"]// array of dictionaries
+                    let screenSize = UIScreen.mainScreen().bounds
+                    tileWidth = CGFloat(screenSize.width)/((dic!["cols"] as! CGFloat))
+                    tileHeight = CGFloat(screenSize.height)/((dic!["rows"] as! CGFloat))
                     for path in pathsArray as! NSArray{
-                        thisPath = [String: Any]()
-                        path.valueForKey("points")
                         let pointsArray = path.valueForKey("points") as! NSArray // array of CGPoint arrays
                         for curve in pointsArray{
                             for p in curve as! NSArray{
@@ -48,11 +50,7 @@ class ReadData {
                                 let point = p as! NSArray
                                 let flx = CGFloat(point[0].floatValue)
                                 let fly = CGFloat(point[1].floatValue)
-                                let screenSize = UIScreen.mainScreen().bounds
-                                tileWidth = screenSize.width/((dic!["cols"] as! CGFloat))
-                                tileHeight = screenSize.height/((dic!["rows"] as! CGFloat))
-                                points.append(CGPointMake(flx  * CGFloat(tileWidth!), fly * CGFloat(tileHeight!)))
-                               
+                                points.append(CGPointMake(flx , fly ))
                                 
                             }
                             pathArray.append(points)
@@ -79,9 +77,11 @@ class ReadData {
                         }
                         
                         thisPath["points"] = pathArray
+                        pathArray = []
+                        paths.append(thisPath)
+                        thisPath = [String: Any]()
 
                     }
-                    paths.append(thisPath)
                     
                 }catch{
                     
@@ -91,6 +91,6 @@ class ReadData {
             Swift.print(error)
             
             // contents could not be loaded
-        }  
+        }
     }
 }
