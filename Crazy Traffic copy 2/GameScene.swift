@@ -10,7 +10,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.blackColor()
         //DrawNodes.drawPlayButton(self, big: true)
         DrawNodes.drawPaths(self)
     }

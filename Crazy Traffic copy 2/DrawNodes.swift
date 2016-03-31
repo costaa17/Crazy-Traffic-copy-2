@@ -109,6 +109,7 @@ class DrawNodes{
         if let path = NSBundle.mainBundle().pathForResource("test", ofType:"json") {
             ReadData.readData(path)
         }
+        let roadColor = randomColor()
         for path in ReadData.paths{
             if path["type"] as! Type != Type.garbage{
                 // build CGPath
@@ -144,7 +145,7 @@ class DrawNodes{
                     let myShapeNode = SKShapeNode()
                     myShapeNode.path = myPath
                     myShapeNode.lineWidth = 53
-                    myShapeNode.strokeColor = UIColor(red: 96/255.0, green: 96/255.0, blue: 96/255.0, alpha: 1.0)//gray
+                    myShapeNode.strokeColor = roadColor
                     scene.addChild(myShapeNode)
                     
                 case Type.rail:
@@ -214,4 +215,19 @@ class DrawNodes{
     static func pointFromIndex(point: CGPoint) -> CGPoint{
         return CGPointMake(point.x * ReadData.tileWidth!, point.y * ReadData.tileHeight!)
     }
+    
+    static func randomColor() -> UIColor{
+        let colorNum = arc4random_uniform(6)
+        switch colorNum{
+        case 0: return UIColor(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        case 1: return UIColor.greenColor()
+        case 2: return UIColor.redColor()
+        case 3: return UIColor.orangeColor()
+        case 4: return UIColor.yellowColor()
+        case 5: return UIColor(red: 1.0, green: 122/255, blue: 1.0, alpha: 1.0)
+        default: return UIColor.redColor()
+            
+        }
+    }
+
 }
