@@ -13,6 +13,9 @@ class GameScene: SKScene {
         self.backgroundColor = UIColor.blackColor()
         //DrawNodes.drawPlayButton(self, big: true)
         DrawNodes.drawPaths(self)
+        let car = DrawNodes.drawCar()
+        car.position = CGPointMake(100, 175)
+        self.addChild(car)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

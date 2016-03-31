@@ -109,7 +109,7 @@ class DrawNodes{
         if let path = NSBundle.mainBundle().pathForResource("test", ofType:"json") {
             ReadData.readData(path)
         }
-        let roadColor = randomColor()
+        
         for path in ReadData.paths{
             if path["type"] as! Type != Type.garbage{
                 // build CGPath
@@ -145,7 +145,7 @@ class DrawNodes{
                     let myShapeNode = SKShapeNode()
                     myShapeNode.path = myPath
                     myShapeNode.lineWidth = 53
-                    myShapeNode.strokeColor = roadColor
+                    myShapeNode.strokeColor = UIColor.whiteColor()
                     scene.addChild(myShapeNode)
                     
                 case Type.rail:
@@ -228,6 +228,63 @@ class DrawNodes{
         default: return UIColor.redColor()
             
         }
+    }
+    
+    static func drawCar()-> SKEffectNode{
+        let carEffectNode =  SKEffectNode()
+        let carPath = CGPathCreateWithRoundedRect (CGRectMake(0,10,160,90), 40.0, 40.0, nil)
+        UIColor.blueColor().setFill()
+        let car = SKShapeNode()
+        car.path = carPath
+        car.fillColor = randomColor()
+        car.strokeColor = UIColor.blackColor()
+        carEffectNode.addChild(car)
+        
+        let topPath = CGPathCreateWithRoundedRect (CGRectMake(15,20,80,70), 20.0, 20.0, nil)
+        UIColor.orangeColor().setFill()
+        let top = SKShapeNode()
+        top.path = topPath
+        top.fillColor = randomColor()
+        top.strokeColor = UIColor.blackColor()
+        carEffectNode.addChild(top)
+        
+        let wheelPath = CGPathCreateWithRoundedRect (CGRectMake(25,0,30,16), 7.0, 7.0, nil)
+        UIColor.blackColor().setFill()
+        let wheel = SKShapeNode()
+        wheel.path = wheelPath
+        wheel.fillColor = UIColor.blackColor()
+        wheel.strokeColor = UIColor.blackColor()
+        carEffectNode.addChild(wheel)
+        
+        let wheel2Path = CGPathCreateWithRoundedRect (CGRectMake(25,94,30,16), 7.0, 7.0, nil)
+        UIColor.blackColor().setFill()
+        let wheel2 = SKShapeNode()
+        wheel2.path = wheel2Path
+        wheel2.fillColor = UIColor.blackColor()
+        wheel2.strokeColor = UIColor.blackColor()
+        carEffectNode.addChild(wheel2)
+        
+        let wheel3Path = CGPathCreateWithRoundedRect (CGRectMake(95,0,30,16), 7.0, 7.0, nil)
+        UIColor.blackColor().setFill()
+        let wheel3 = SKShapeNode()
+        wheel3.path = wheel3Path
+        wheel3.fillColor = UIColor.blackColor()
+        wheel3.strokeColor = UIColor.blackColor()
+        carEffectNode.addChild(wheel3)
+        
+        let wheel4Path = CGPathCreateWithRoundedRect (CGRectMake(95,94,30,16), 7.0, 7.0, nil)
+        UIColor.blackColor().setFill()
+        let wheel4 = SKShapeNode()
+        wheel4.path = wheel4Path
+        wheel4.fillColor = UIColor.blackColor()
+        wheel4.strokeColor = UIColor.blackColor()
+        carEffectNode.addChild(wheel4)
+        
+        carEffectNode.xScale = 0.3
+        carEffectNode.yScale = 0.3
+        return carEffectNode
+        
+    
     }
 
 }
