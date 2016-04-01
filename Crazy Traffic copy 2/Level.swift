@@ -9,9 +9,10 @@
 import Foundation
 import SpriteKit
 
-class Level{
+class Level: SKScene{
     func gameOver(){
         // update high score
         // set game over scene
     }
+    
 }

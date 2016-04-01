@@ -24,6 +24,8 @@
 		24AB07BF1CA8DE62005DE330 /* ContactTypeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */; };
 		24AB07C11CA8E269005DE330 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07C01CA8E269005DE330 /* Level.swift */; };
 		24AB07C31CAA1BFF005DE330 /* MapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AB07C21CAA1BFF005DE330 /* MapScene.swift */; };
+		24E9684E1CAE08FE0042FB79 /* Useful.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9684D1CAE08FE0042FB79 /* Useful.swift */; };
+		24E968501CAE0C990042FB79 /* trainRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E9684F1CAE0C990042FB79 /* trainRunner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTypeTest.swift; sourceTree = "<group>"; };
 		24AB07C01CA8E269005DE330 /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		24AB07C21CAA1BFF005DE330 /* MapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapScene.swift; sourceTree = "<group>"; };
+		24E9684D1CAE08FE0042FB79 /* Useful.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Useful.swift; sourceTree = "<group>"; };
+		24E9684F1CAE0C990042FB79 /* trainRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = trainRunner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 				24AB07B81CA85F28005DE330 /* SlideDirection.swift */,
 				24AB07BE1CA8DE62005DE330 /* ContactTypeTest.swift */,
 				24AB07C21CAA1BFF005DE330 /* MapScene.swift */,
+				24E9684D1CAE08FE0042FB79 /* Useful.swift */,
+				24E9684F1CAE0C990042FB79 /* trainRunner.swift */,
 			);
 			path = "Crazy Traffic copy 2";
 			sourceTree = "<group>";
@@ -294,7 +300,9 @@
 				24AB07C11CA8E269005DE330 /* Level.swift in Sources */,
 				24AB07891CA85C9A005DE330 /* GameViewController.swift in Sources */,
 				24AB07C31CAA1BFF005DE330 /* MapScene.swift in Sources */,
+				24E9684E1CAE08FE0042FB79 /* Useful.swift in Sources */,
 				24AB07B71CA85F16005DE330 /* ReadData.swift in Sources */,
+				24E968501CAE0C990042FB79 /* trainRunner.swift in Sources */,
 				24AB07831CA85C9A005DE330 /* AppDelegate.swift in Sources */,
 				24AB07BF1CA8DE62005DE330 /* ContactTypeTest.swift in Sources */,
 				24AB07B91CA85F28005DE330 /* SlideDirection.swift in Sources */,

@@ -78,6 +78,9 @@ class ReadData {
                         
                         thisPath["points"] = pathArray
                         pathArray = []
+                        if thisPath["type"] as! Type != Type.garbage{
+                            thisPath["remainingTime"] = Useful.random(100,max: 450)
+                        }
                         paths.append(thisPath)
                         thisPath = [String: Any]()
 

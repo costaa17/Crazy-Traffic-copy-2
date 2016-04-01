@@ -114,31 +114,8 @@ class DrawNodes{
             if path["type"] as! Type != Type.garbage{
                 // build CGPath
                 let curves = path["points"] as! [[CGPoint]]
-                let myPath = CGPathCreateMutable()
-                for curve in curves{
-                    if curve.count == 2 {
-                        // Draw a straight line
-                        //if path[0] == a {
-                        CGPathMoveToPoint ( myPath , nil, centerPoint(curve[0]).x, centerPoint(curve[0]).y )
-                        //}
-                        CGPathAddLineToPoint( myPath, nil, centerPoint(curve[1]).x, centerPoint(curve[1]).y )
-                        
-                    }else if curve.count == 3 {
-                        // Draw curve with 3 points
-                        //if path[0] == a {
-                        CGPathMoveToPoint( myPath , nil, centerPoint(curve[0]).x, centerPoint(curve[0]).y )
-                        //}
-                        CGPathAddCurveToPoint( myPath, nil, centerPoint(curve[2]).x, centerPoint(curve[2]).y, centerPoint(curve[1]).x, centerPoint(curve[1]).y,centerPoint(curve[1]).x, centerPoint(curve[1]).y )
-                        
-                    }else if curve.count == 4 {
-                        // Draw curve with 4 points
-                        //if path[0] == a {
-                        CGPathMoveToPoint( myPath , nil, centerPoint(curve[0]).x, centerPoint(curve[0]).y )
-                        //}
-                        CGPathAddCurveToPoint( myPath, nil, centerPoint(curve[2]).x, centerPoint(curve[2]).y, centerPoint(curve[3]).x, centerPoint(curve[3]).y,centerPoint(curve[1]).x, centerPoint(curve[1]).y )
-                    }
-                }
-                // myPath is the CGPath
+                let myPath = Useful.buildCGPath(curves) // CGPath
+                
                 switch path["type"] as! Type{
                 
                 case Type.road:
@@ -193,96 +170,64 @@ class DrawNodes{
     }
     
     
-    static func newCar(scene: SKScene){
-        // set up texture, physics, name, speed, type and add to scene
-    }
-    
-    static func newPerson(scene: SKScene){
-        // set up texture, physics, name, speed, type and add to scene
-    }
-    
-    static func newTrain(scene: SKScene){
-        // set up texture, physics, name, speed, type, random num of cars and add to scene
-    }
-    
-    static func addGarbage(scene: SKScene){
-        // random type in random location
-    }
-    static func centerPoint(myPoint: CGPoint) -> CGPoint{
-        let point = pointFromIndex(myPoint)
-        return CGPointMake((floor(point.x / ReadData.tileWidth!) * ReadData.tileWidth!) + ReadData.tileWidth!, (floor(point.y / ReadData.tileHeight!) * ReadData.tileHeight!) + ReadData.tileHeight!)
-    }
-    static func pointFromIndex(point: CGPoint) -> CGPoint{
-        return CGPointMake(point.x * ReadData.tileWidth!, point.y * ReadData.tileHeight!)
-    }
-    
-    static func randomColor() -> UIColor{
-        let colorNum = arc4random_uniform(6)
-        switch colorNum{
-        case 0: return UIColor(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        case 1: return UIColor.greenColor()
-        case 2: return UIColor.redColor()
-        case 3: return UIColor.orangeColor()
-        case 4: return UIColor.yellowColor()
-        case 5: return UIColor(red: 1.0, green: 122/255, blue: 1.0, alpha: 1.0)
-        default: return UIColor.redColor()
-            
-        }
-    }
-    
-    static func drawCar()-> SKEffectNode{
+    static func drawCar(scene: SKScene)-> SKSpriteNode{
         let carEffectNode =  SKEffectNode()
-        let carPath = CGPathCreateWithRoundedRect (CGRectMake(0,10,160,90), 40.0, 40.0, nil)
-        UIColor.blueColor().setFill()
+        let carPath = CGPathCreateWithRoundedRect (CGRectMake(10,0,90,160), 40.0, 40.0, nil)
         let car = SKShapeNode()
         car.path = carPath
-        car.fillColor = randomColor()
+        car.fillColor = Useful.randomColor()
         car.strokeColor = UIColor.blackColor()
         carEffectNode.addChild(car)
         
-        let topPath = CGPathCreateWithRoundedRect (CGRectMake(15,20,80,70), 20.0, 20.0, nil)
-        UIColor.orangeColor().setFill()
+        let topPath = CGPathCreateWithRoundedRect (CGRectMake(20,15,70,80), 20.0, 20.0, nil)
         let top = SKShapeNode()
         top.path = topPath
-        top.fillColor = randomColor()
+        var randomColor = Useful.randomColor()
+        if randomColor == car.fillColor{
+            randomColor = UIColor.blackColor()
+        }
+        top.fillColor = randomColor
         top.strokeColor = UIColor.blackColor()
         carEffectNode.addChild(top)
         
-        let wheelPath = CGPathCreateWithRoundedRect (CGRectMake(25,0,30,16), 7.0, 7.0, nil)
-        UIColor.blackColor().setFill()
+        let wheelPath = CGPathCreateWithRoundedRect (CGRectMake(0,25,16,30), 7.0, 7.0, nil)
         let wheel = SKShapeNode()
         wheel.path = wheelPath
         wheel.fillColor = UIColor.blackColor()
         wheel.strokeColor = UIColor.blackColor()
         carEffectNode.addChild(wheel)
         
-        let wheel2Path = CGPathCreateWithRoundedRect (CGRectMake(25,94,30,16), 7.0, 7.0, nil)
-        UIColor.blackColor().setFill()
+        let wheel2Path = CGPathCreateWithRoundedRect (CGRectMake(94,25,16,30), 7.0, 7.0, nil)
         let wheel2 = SKShapeNode()
         wheel2.path = wheel2Path
         wheel2.fillColor = UIColor.blackColor()
         wheel2.strokeColor = UIColor.blackColor()
         carEffectNode.addChild(wheel2)
         
-        let wheel3Path = CGPathCreateWithRoundedRect (CGRectMake(95,0,30,16), 7.0, 7.0, nil)
-        UIColor.blackColor().setFill()
+        let wheel3Path = CGPathCreateWithRoundedRect (CGRectMake(0,95,16,30), 7.0, 7.0, nil)
         let wheel3 = SKShapeNode()
         wheel3.path = wheel3Path
         wheel3.fillColor = UIColor.blackColor()
         wheel3.strokeColor = UIColor.blackColor()
         carEffectNode.addChild(wheel3)
         
-        let wheel4Path = CGPathCreateWithRoundedRect (CGRectMake(95,94,30,16), 7.0, 7.0, nil)
-        UIColor.blackColor().setFill()
+        let wheel4Path = CGPathCreateWithRoundedRect (CGRectMake(94,95,16,30), 7.0, 7.0, nil)
         let wheel4 = SKShapeNode()
         wheel4.path = wheel4Path
         wheel4.fillColor = UIColor.blackColor()
         wheel4.strokeColor = UIColor.blackColor()
         carEffectNode.addChild(wheel4)
         
-        carEffectNode.xScale = 0.3
-        carEffectNode.yScale = 0.3
-        return carEffectNode
+        
+        carEffectNode.xScale = 0.6
+        carEffectNode.yScale = 0.6
+        carEffectNode.shouldRasterize = true
+        
+        let texture = scene.view!.textureFromNode(carEffectNode)
+        let carSpriteNode = SKSpriteNode(texture: texture)
+        
+        
+        return carSpriteNode
         
     
     }
