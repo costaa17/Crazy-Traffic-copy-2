@@ -19,6 +19,9 @@ enum ContactType{
 class ContactTypeTest{
     
     static func contactTypeTest(contact: SKPhysicsContact) -> ContactType{
+        if contact.bodyA.categoryBitMask == TrainRunner.carCategory && contact.bodyB.categoryBitMask == TrainRunner.carCategory{
+            return ContactType.crash
+        }
         return ContactType.useless
     }
     

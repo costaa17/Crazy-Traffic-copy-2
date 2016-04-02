@@ -19,23 +19,9 @@ class Useful{
         return CGPointMake(point.x * ReadData.tileWidth!, point.y * ReadData.tileHeight!)
     }
     
-    static func randomColor() -> UIColor{
-        let colorNum = arc4random_uniform(6)
-        switch colorNum{
-        case 0: return UIColor(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
-        case 1: return UIColor.greenColor()
-        case 2: return UIColor.redColor()
-        case 3: return UIColor.orangeColor()
-        case 4: return UIColor.yellowColor()
-        case 5: return UIColor(red: 1.0, green: 122/255, blue: 1.0, alpha: 1.0)
-        default: return UIColor.redColor()
-            
-        }
-    }
-    
     static func random(min: UInt32, max: UInt32) -> UInt32 {
         
-        let range = UInt32(min)...UInt32(max)
+        let range = UInt32(min)...UInt32(max - 1)
         return range.startIndex + arc4random_uniform(range.endIndex - range.startIndex + 1 )
         
     }

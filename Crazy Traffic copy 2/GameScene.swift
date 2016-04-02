@@ -11,11 +11,7 @@ import SpriteKit
 class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         self.backgroundColor = UIColor.blackColor()
-        //DrawNodes.drawPlayButton(self, big: true)
-        DrawNodes.drawPaths(self)
-        trainRunner.runTrains(self)
-        trainRunner.runTrains(self)
-        //self.addChild(car)
+        DrawNodes.drawPlayButton(self, big: true)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -26,7 +22,7 @@ class GameScene: SKScene {
         for node in nodes {
             if node.name == "playButton" {
                 // go to Map
-                let scene = MapScene()
+                let scene = Level()
                 let skView = self.view as SKView!
                 skView.ignoresSiblingOrder = true
                 scene.scaleMode = .ResizeFill

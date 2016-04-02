@@ -19,7 +19,9 @@ class DrawNodes{
     static let highScoreLabel = SKLabelNode(fontNamed:"Chalkduster")
     static let goalLabel = SKLabelNode(fontNamed:"Chalkduster")
     static let specialGoalLabel = SKLabelNode(fontNamed:"Chalkduster")
+    static let gameOverLabel = SKLabelNode(fontNamed:"Chalkduster")
     static let tutorialShapeN = SKShapeNode()
+    
     
     static func drawPlayButton(scene: SKScene, big: Bool){
         var clippath = CGPathCreateWithRoundedRect (CGRectMake(0,0,175,50), 10.0, 10.0, nil)
@@ -29,9 +31,9 @@ class DrawNodes{
         let button = SKEffectNode()
         let playB = SKShapeNode()
         playB.path = clippath
-        playB.strokeColor = UIColor.blackColor()
-        playB.fillColor = UIColor.whiteColor()
-        playB.lineWidth = 5
+        playB.strokeColor = UIColor.whiteColor()
+        playB.fillColor = UIColor.blackColor()
+        playB.lineWidth = 8
         playB.position = CGPointMake(CGRectGetMidX(scene.frame), CGRectGetMidY(scene.frame))
         let playDraw = SKShapeNode()
         let play = CGPathCreateMutable()
@@ -48,9 +50,9 @@ class DrawNodes{
             
         }
         playDraw.path = play
-        playDraw.strokeColor = UIColor.blackColor()
-        playDraw.fillColor = UIColor.greenColor()
-        playDraw.lineWidth = 3
+        playDraw.strokeColor = UIColor.whiteColor()
+        playDraw.fillColor = UIColor.blackColor()
+        playDraw.lineWidth = 5
         playDraw.position = CGPointMake(CGRectGetMidX(scene.frame), CGRectGetMidY(scene.frame))
         let texture = scene.view!.textureFromNode(playB)
         let sprite = SKSpriteNode(texture: texture)
@@ -103,6 +105,13 @@ class DrawNodes{
     
     static func drawSpecialGoalLabel(scene: SKScene){
         
+    }
+    
+    static func drawGameOverLabel(scene: SKScene){
+        gameOverLabel.text = "Game Over"
+        gameOverLabel.fontSize = 50
+        gameOverLabel.position = CGPoint(x:CGRectGetMidX(scene.frame), y:CGRectGetMidY(scene.frame) + 100)
+        scene.addChild(gameOverLabel)
     }
     
     static func drawPaths(scene: SKScene) {
@@ -171,22 +180,28 @@ class DrawNodes{
     
     
     static func drawCar(scene: SKScene)-> SKSpriteNode{
+        let i = Useful.random(0, max: 1)
+        var carColor = UIColor.blackColor()
+        var topColor = UIColor.blackColor()
+        
+        if(i == 0){
+            carColor = UIColor.whiteColor()
+        }else{
+            topColor = UIColor.whiteColor()
+        }
         let carEffectNode =  SKEffectNode()
         let carPath = CGPathCreateWithRoundedRect (CGRectMake(10,0,90,160), 40.0, 40.0, nil)
         let car = SKShapeNode()
         car.path = carPath
-        car.fillColor = Useful.randomColor()
+        car.fillColor = carColor
+        car.lineWidth = 8
         car.strokeColor = UIColor.blackColor()
         carEffectNode.addChild(car)
         
         let topPath = CGPathCreateWithRoundedRect (CGRectMake(20,15,70,80), 20.0, 20.0, nil)
         let top = SKShapeNode()
         top.path = topPath
-        var randomColor = Useful.randomColor()
-        if randomColor == car.fillColor{
-            randomColor = UIColor.blackColor()
-        }
-        top.fillColor = randomColor
+        top.fillColor = topColor
         top.strokeColor = UIColor.blackColor()
         carEffectNode.addChild(top)
         
